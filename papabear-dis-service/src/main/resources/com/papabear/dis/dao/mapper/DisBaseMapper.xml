@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.papabear.dis.dao.DisBaseDao" >
+  <resultMap id="BaseResultMap" type="com.papabear.dis.entity.DisBase" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="category_model_id" property="categoryModelId" jdbcType="BIGINT" />
+    <result column="category_model_format_id" property="categoryModelFormatId" jdbcType="BIGINT" />
+    <result column="dis_money" property="disMoney" jdbcType="REAL" />
+    <result column="profit_money" property="profitMoney" jdbcType="REAL" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="time_count" property="timeCount" jdbcType="INTEGER" />
+    <result column="create_date_time" property="createDateTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="invalid" property="invalid" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, category_model_id, category_model_format_id, dis_money, profit_money, status, 
+    time_count, create_date_time, update_time, invalid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_dis_base
+    where id = #{id,jdbcType=BIGINT} and invalid=0
+  </select>
+  <select id="getByCategoryModelId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_dis_base
+    where category_model_id = #{categoryModelId,jdbcType=BIGINT} and invalid=0
+  </select>
+  <select id="queryAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_dis_base
+    where invalid=0
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tbl_dis_base
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.papabear.dis.entity.DisBase" >
+    insert into tbl_dis_base (id, category_model_id, category_model_format_id, 
+      dis_money, profit_money, status, 
+      time_count, create_date_time, update_time, 
+      invalid)
+    values (#{id,jdbcType=BIGINT}, #{categoryModelId,jdbcType=BIGINT}, #{categoryModelFormatId,jdbcType=BIGINT}, 
+      #{disMoney,jdbcType=REAL}, #{profitMoney,jdbcType=REAL}, #{status,jdbcType=TINYINT}, 
+      #{timeCount,jdbcType=INTEGER}, #{createDateTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{invalid,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.papabear.dis.entity.DisBase" >
+    insert into tbl_dis_base
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="categoryModelId != null" >
+        category_model_id,
+      </if>
+      <if test="categoryModelFormatId != null" >
+        category_model_format_id,
+      </if>
+      <if test="disMoney != null" >
+        dis_money,
+      </if>
+      <if test="profitMoney != null" >
+        profit_money,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="timeCount != null" >
+        time_count,
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="invalid != null" >
+        invalid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="categoryModelId != null" >
+        #{categoryModelId,jdbcType=BIGINT},
+      </if>
+      <if test="categoryModelFormatId != null" >
+        #{categoryModelFormatId,jdbcType=BIGINT},
+      </if>
+      <if test="disMoney != null" >
+        #{disMoney,jdbcType=REAL},
+      </if>
+      <if test="profitMoney != null" >
+        #{profitMoney,jdbcType=REAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="timeCount != null" >
+        #{timeCount,jdbcType=INTEGER},
+      </if>
+      <if test="createDateTime != null" >
+        #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="invalid != null" >
+        #{invalid,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.papabear.dis.entity.DisBase" >
+    update tbl_dis_base
+    <set >
+      <if test="categoryModelId != null" >
+        category_model_id = #{categoryModelId,jdbcType=BIGINT},
+      </if>
+      <if test="categoryModelFormatId != null" >
+        category_model_format_id = #{categoryModelFormatId,jdbcType=BIGINT},
+      </if>
+      <if test="disMoney != null" >
+        dis_money = #{disMoney,jdbcType=REAL},
+      </if>
+      <if test="profitMoney != null" >
+        profit_money = #{profitMoney,jdbcType=REAL},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="timeCount != null" >
+        time_count = #{timeCount,jdbcType=INTEGER},
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="invalid != null" >
+        invalid = #{invalid,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.papabear.dis.entity.DisBase" >
+    update tbl_dis_base
+    set category_model_id = #{categoryModelId,jdbcType=BIGINT},
+      category_model_format_id = #{categoryModelFormatId,jdbcType=BIGINT},
+      dis_money = #{disMoney,jdbcType=REAL},
+      profit_money = #{profitMoney,jdbcType=REAL},
+      status = #{status,jdbcType=TINYINT},
+      time_count = #{timeCount,jdbcType=INTEGER},
+      create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      invalid = #{invalid,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
